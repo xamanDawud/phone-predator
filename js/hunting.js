@@ -15,34 +15,46 @@ let getPhones = (phoneData) => {
     } else {
         noPhone.classList.add("d-none");
     }
-    // phoneData = phoneData.slice(0, 5);
+
     phoneData.forEach((phone) => {
         let div = document.createElement("div");
         div.innerHTML = `
-                    <div class="card p-3">
-                        <img src="${phone.image}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">${phone.phone_name}</h5>
-                            <p class="card-text">
-                                This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
-                        </div>
-                    </div>
-            `;
+        <div class="card p-3">
+        <img src="${phone.image}" class="card-img-top" alt="..." />
+        <div class="card-body">
+        <h5 class="card-title">${phone.phone_name}</h5>
+        <p class="card-text">
+        This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        </p>
+        </div>
+        </div>
+        `;
         div.classList.add("col");
         section.appendChild(div);
         loaderStop();
     });
 };
 
+document
+    .getElementById("search-input")
+    .addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            searchResult();
+        }
+    });
+
 document.getElementById("btn").addEventListener("click", function() {
+    searchResult();
+});
+
+function searchResult() {
     let inputField = document.getElementById("search-input");
     let inputFieldValue = inputField.value;
     loadPhoneData(inputFieldValue);
     inputField.value = "";
     // load Start
     loader();
-});
+}
 
 function loader() {
     let loaderSection = document.getElementById("spinners");
