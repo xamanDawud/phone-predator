@@ -11,6 +11,7 @@ let getPhones = (phoneData) => {
     let noPhone = document.getElementById("no-phone-status");
     if (phoneData.length === 0) {
         noPhone.classList.remove("d-none");
+        loaderStop();
     } else {
         noPhone.classList.add("d-none");
     }
@@ -30,6 +31,7 @@ let getPhones = (phoneData) => {
             `;
         div.classList.add("col");
         section.appendChild(div);
+        loaderStop();
     });
 };
 
@@ -38,4 +40,16 @@ document.getElementById("btn").addEventListener("click", function() {
     let inputFieldValue = inputField.value;
     loadPhoneData(inputFieldValue);
     inputField.value = "";
+    // load Start
+    loader();
 });
+
+function loader() {
+    let loaderSection = document.getElementById("spinners");
+    loaderSection.classList.remove("d-none");
+}
+
+function loaderStop() {
+    let loaderSection = document.getElementById("spinners");
+    loaderSection.classList.add("d-none");
+}
